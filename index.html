@@ -1,635 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GoolWall — 4K / 8K Wallpapers</title>
-
 <style>
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    background: #07080b;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* HEADER */
-
-header {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    background: rgba(7, 8, 11, 0.88);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid #1c1f27;
-}
-
-.nav {
-    max-width: 1400px;
-    margin: auto;
-    padding: 18px 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    font-size: 25px;
-    font-weight: 900;
-    letter-spacing: -1px;
-}
-
-.logo span {
-    color: #795cff;
-}
-
-.quality {
-    padding: 8px 13px;
-    border: 1px solid #292d37;
-    border-radius: 999px;
-    color: #aaa;
-    font-size: 12px;
-}
-
-/* HERO */
-
-.hero {
-    max-width: 1400px;
-    margin: auto;
-    padding: 70px 5% 35px;
-}
-
-.hero h1 {
-    margin: 0;
-    font-size: clamp(42px, 8vw, 90px);
-    line-height: .92;
-    letter-spacing: -5px;
-}
-
-.hero h1 span {
-    color: #795cff;
-}
-
-.hero p {
-    max-width: 680px;
-    color: #999;
-    font-size: 17px;
-    line-height: 1.6;
-    margin-top: 25px;
-}
-
-/* FILTERS */
-
-.filters {
-    max-width: 1400px;
-    margin: 0 auto 28px;
-    padding: 0 5%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 9px;
-}
-
-.filter {
-    cursor: pointer;
-    border: 1px solid #292d37;
-    background: #101218;
-    color: #ccc;
-    padding: 11px 16px;
-    border-radius: 12px;
-    transition: .2s;
-}
-
-.filter:hover,
-.filter.active {
-    background: #795cff;
-    border-color: #795cff;
-    color: white;
-}
-
-/* GRID */
-
-.wallpapers {
-    max-width: 1400px;
-    margin: auto;
-    padding: 0 5% 70px;
-
-    display: grid;
-    grid-template-columns:
-        repeat(auto-fit, minmax(260px, 1fr));
-
-    gap: 17px;
-}
-
-/* CARD */
-
-.wallpaper {
-    height: 350px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    border: 1px solid #20232c;
-    background: #111;
-    cursor: pointer;
-}
-
-.wallpaper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-
-    transition:
-        transform .5s ease,
-        filter .5s ease;
-}
-
-.wallpaper:hover img {
-    transform: scale(1.08);
-    filter: brightness(.75);
-}
-
-.wallpaper-info {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    padding: 25px 20px 20px;
-
-    background:
-        linear-gradient(
-            transparent,
-            rgba(0,0,0,.9)
-        );
-}
-
-.wallpaper-title {
-    font-size: 19px;
-    font-weight: 800;
-}
-
-.wallpaper-meta {
-    color: #aaa;
-    font-size: 12px;
-    margin-top: 7px;
-}
-
-/* MODAL */
-
-.modal {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-
-    display: none;
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(0,0,0,.94);
-    padding: 25px;
-}
-
-.modal.show {
-    display: flex;
-}
-
-.modal img {
-    max-width: 96vw;
-    max-height: 90vh;
-
-    object-fit: contain;
-
-    border-radius: 12px;
-    box-shadow: 0 20px 80px rgba(0,0,0,.7);
-}
-
-.close {
-    position: fixed;
-    top: 18px;
-    right: 20px;
-
-    width: 48px;
-    height: 48px;
-
-    border: 0;
-    border-radius: 50%;
-
-    background: #17191f;
-    color: white;
-
-    font-size: 30px;
-    cursor: pointer;
-}
-
-.close:hover {
-    background: #795cff;
-}
-
-/* FOOTER */
-
-footer {
-    border-top: 1px solid #1c1f27;
-    padding: 30px 20px;
-    text-align: center;
-    color: #666;
-    font-size: 13px;
-}
-
-/* MOBILE */
-
-@media (max-width: 600px) {
-
-    .nav {
-        padding: 16px 20px;
-    }
-
-    .quality {
-        display: none;
-    }
-
-    .hero {
-        padding: 45px 20px 30px;
-    }
-
-    .hero h1 {
-        font-size: 48px;
-        letter-spacing: -3px;
-    }
-
-    .hero p {
-        font-size: 15px;
-    }
-
-    .filters {
-        padding: 0 20px;
-    }
-
-    .wallpapers {
-        padding: 0 20px 50px;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 10px;
-    }
-
-    .wallpaper {
-        height: 245px;
-        border-radius: 15px;
-    }
-
-    .wallpaper-info {
-        padding: 20px 12px 12px;
-    }
-
-    .wallpaper-title {
-        font-size: 14px;
-    }
-
-    .wallpaper-meta {
-        font-size: 10px;
-    }
-}
+*{box-sizing:border-box}body{margin:0;background:#07080b;color:#fff;font-family:Arial,Helvetica,sans-serif}
+header{position:sticky;top:0;z-index:10;background:rgba(7,8,11,.88);backdrop-filter:blur(16px);border-bottom:1px solid #1b1d24;padding:18px 5%}
+nav{display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:1400px;margin:auto}
+.logo{font-size:24px;font-weight:900;letter-spacing:-1px}.logo span{color:#7c5cff}
+.badge{font-size:12px;color:#aaa;border:1px solid #292c35;border-radius:999px;padding:8px 12px}
+.hero{max-width:1400px;margin:auto;padding:55px 5% 25px}
+h1{font-size:clamp(38px,7vw,82px);line-height:.95;margin:0 0 18px;letter-spacing:-4px}
+h1 span{color:#7c5cff}.hero p{color:#999;font-size:17px;max-width:650px;line-height:1.6}
+.filters{max-width:1400px;margin:10px auto 25px;padding:0 5%;display:flex;gap:9px;flex-wrap:wrap}
+button{font:inherit;color:#ddd;background:#101218;border:1px solid #252833;padding:10px 15px;border-radius:12px;cursor:pointer}
+button.active,button:hover{background:#7c5cff;color:#fff;border-color:#7c5cff}
+.grid{max-width:1400px;margin:auto;padding:0 5% 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{position:relative;height:340px;border-radius:20px;overflow:hidden;background:#111;cursor:pointer;border:1px solid #20232c}
+.card img{width:100%;height:100%;object-fit:cover;display:block;transition:.45s}
+.card:hover img{transform:scale(1.06)}
+.info{position:absolute;left:0;right:0;bottom:0;padding:22px;background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.info b{font-size:18px}.info small{display:block;color:#bbb;margin-top:6px}
+.modal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.92);padding:25px;align-items:center;justify-content:center}
+.modal.show{display:flex}.modal img{max-width:96vw;max-height:88vh;object-fit:contain;border-radius:12px}
+.close{position:fixed;right:22px;top:18px;font-size:30px;background:#17191f;border:0;width:48px;height:48px;border-radius:50%}
+.note{text-align:center;color:#777;font-size:12px;padding:0 20px 30px}
+@media(max-width:600px){.hero{padding-top:35px}h1{letter-spacing:-2px}.card{height:270px}.badge{display:none}}
 </style>
 </head>
-
 <body>
-
-<header>
-
-<div class="nav">
-
-<div class="logo">
-Gool<span>Wall</span>
-</div>
-
-<div class="quality">
-4K / 8K • WALLPAPERS
-</div>
-
-</div>
-
-</header>
-
+<header><nav><div class="logo">Gool<span>Wall</span></div><div class="badge">4K / 8K • WALLPAPERS</div></nav></header>
 
 <section class="hero">
-
-<h1>
-Обои, которые<br>
-<span>хочется поставить.</span>
-</h1>
-
-<p>
-Большая коллекция красивых обоев для телефона,
-ПК и монитора. Нажми на любую картинку,
-чтобы открыть её на весь экран.
-</p>
-
+<h1>Обои, которые<br><span>хочется поставить.</span></h1>
+<p>Подборка красивых обоев для телефона, ПК и мониторов. Открывай картинку на весь экран — ничего скачивать для просмотра не нужно.</p>
 </section>
 
-
 <div class="filters">
-
-<button class="filter active" data-category="all">
-Все
-</button>
-
-<button class="filter" data-category="nature">
-🌲 Природа
-</button>
-
-<button class="filter" data-category="space">
-🌌 Космос
-</button>
-
-<button class="filter" data-category="city">
-🌃 Города
-</button>
-
-<button class="filter" data-category="dark">
-🖤 Dark
-</button>
-
+<button class="active" data-cat="all">Все</button>
+<button data-cat="nature">Природа</button>
+<button data-cat="space">Космос</button>
+<button data-cat="city">Города</button>
+<button data-cat="dark">Dark</button>
 </div>
 
+<main class="grid" id="grid"></main>
+<div class="note">Изображения загружаются с внешнего фотохостинга. Реальное разрешение зависит от исходника.</div>
 
-<main class="wallpapers" id="wallpapers">
-</main>
-
-
-<footer>
-GoolWall © 2026 — 4K / 8K Wallpapers
-</footer>
-
-
-<!-- FULLSCREEN -->
-
-<div class="modal" id="modal">
-
-<button class="close" id="close">
-×
-</button>
-
-<img id="fullscreenImage" src="" alt="Wallpaper">
-
-</div>
-
+<div class="modal" id="modal"><button class="close" id="close">×</button><img id="big" alt=""></div>
 
 <script>
-
-/* =================================
-   WALLPAPERS
-================================= */
-
-const wallpapers = [
-
-{
-    category: "nature",
-    title: "Mountain",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "nature",
-    title: "Misty Lake",
-    image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "nature",
-    title: "Wild Nature",
-    image: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "nature",
-    title: "Forest",
-    image: "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "space",
-    title: "Deep Space",
-    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "space",
-    title: "Starry Sky",
-    image: "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "city",
-    title: "Night City",
-    image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "city",
-    title: "Neon City",
-    image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "dark",
-    title: "Dark Mountain",
-    image: "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "dark",
-    title: "Dark Ocean",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "city",
-    title: "Architecture",
-    image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=3840&q=95"
-},
-
-{
-    category: "nature",
-    title: "Sunset",
-    image: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=3840&q=95"
-}
-
+const wallpapers=[
+["nature","Горные вершины","https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=7680&q=95"],
+["nature","Туманное озеро","https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=7680&q=95"],
+["nature","Дикая природа","https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=7680&q=95"],
+["nature","Лес в горах","https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=7680&q=95"],
+["space","Космос","https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=7680&q=95"],
+["space","Звёздное небо","https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=7680&q=95"],
+["city","Ночной город","https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=7680&q=95"],
+["city","Неон","https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=7680&q=95"],
+["dark","Dark Mountain","https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=7680&q=95"],
+["dark","Черный океан","https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=7680&q=95"],
+["city","Архитектура","https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=7680&q=95"],
+["nature","Закат","https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=7680&q=95"]
 ];
 
-
-/* =================================
-   ELEMENTS
-================================= */
-
-const container =
-    document.getElementById("wallpapers");
-
-const modal =
-    document.getElementById("modal");
-
-const fullscreenImage =
-    document.getElementById("fullscreenImage");
-
-const close =
-    document.getElementById("close");
-
-
-/* =================================
-   RENDER
-================================= */
-
-function renderWallpapers(category = "all") {
-
-    container.innerHTML = "";
-
-    const filtered =
-        wallpapers.filter(wallpaper => {
-
-            if (category === "all") {
-                return true;
-            }
-
-            return wallpaper.category === category;
-
-        });
-
-
-    filtered.forEach(wallpaper => {
-
-        const card =
-            document.createElement("article");
-
-        card.className = "wallpaper";
-
-
-        card.innerHTML = `
-
-            <img
-                loading="lazy"
-                src="${wallpaper.image}"
-                alt="${wallpaper.title}"
-            >
-
-            <div class="wallpaper-info">
-
-                <div class="wallpaper-title">
-                    ${wallpaper.title}
-                </div>
-
-                <div class="wallpaper-meta">
-                    ${wallpaper.category.toUpperCase()}
-                    • 4K / 8K
-                </div>
-
-            </div>
-
-        `;
-
-
-        card.addEventListener("click", () => {
-
-            fullscreenImage.src =
-                wallpaper.image;
-
-            modal.classList.add("show");
-
-        });
-
-
-        container.appendChild(card);
-
-    });
-
+const grid=document.getElementById("grid");
+function render(cat="all"){
+ grid.innerHTML="";
+ wallpapers.filter(x=>cat==="all"||x[0]===cat).forEach(x=>{
+   const card=document.createElement("article");
+   card.className="card";
+   card.innerHTML=`<img loading="lazy" src="${x[2]}" alt="${x[1]}"><div class="info"><b>${x[1]}</b><small>${x[0].toUpperCase()} • 4K / 8K</small></div>`;
+   card.onclick=()=>{document.getElementById("big").src=x[2];document.getElementById("modal").classList.add("show")};
+   grid.appendChild(card);
+ });
 }
-
-
-/* =================================
-   FILTERS
-================================= */
-
-document
-.querySelectorAll(".filter")
-.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        document
-        .querySelectorAll(".filter")
-        .forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
-
-
-        button.classList.add("active");
-
-
-        renderWallpapers(
-            button.dataset.category
-        );
-
-    });
-
+document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll(".filters button").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active"); render(b.dataset.cat);
 });
-
-
-/* =================================
-   CLOSE MODAL
-================================= */
-
-close.addEventListener("click", () => {
-
-    modal.classList.remove("show");
-
-    fullscreenImage.src = "";
-
-});
-
-
-modal.addEventListener("click", event => {
-
-    if (event.target === modal) {
-
-        modal.classList.remove("show");
-
-        fullscreenImage.src = "";
-
-    }
-
-});
-
-
-document.addEventListener("keydown", event => {
-
-    if (event.key === "Escape") {
-
-        modal.classList.remove("show");
-
-        fullscreenImage.src = "";
-
-    }
-
-});
-
-
-/* =================================
-   START
-================================= */
-
-renderWallpapers();
-
+document.getElementById("close").onclick=()=>document.getElementById("modal").classList.remove("show");
+document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")e.currentTarget.classList.remove("show")};
+render();
 </script>
-
 </body>
 </html>
