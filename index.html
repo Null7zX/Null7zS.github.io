@@ -1,673 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GoolTool — AI Hub</title>
-<meta name="description" content="GoolTool — AI приложения и полезные инструменты">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GoolWall — 4K / 8K Wallpapers</title>
 <style>
-:root {
-    --bg: #030506;
-    --card: #090d10;
-    --card-hover: #0d1317;
-    --border: #1b252b;
-    --text: #f4f7f8;
-    --muted: #7e8a92;
-    --green: #00ff9c;
-    --blue: #00c8ff;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background:
-        radial-gradient(circle at 10% 0%, rgba(0,255,156,.10), transparent 30%),
-        radial-gradient(circle at 90% 15%, rgba(0,200,255,.08), transparent 28%),
-        var(--bg);
-    color: var(--text);
-    font-family: Arial, Helvetica, sans-serif;
-    min-height: 100vh;
-}
-
-/* фон-сетка */
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    opacity: .18;
-    background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-    background-size: 40px 40px;
-}
-
-.container {
-    width: min(1120px, 92%);
-    margin: auto;
-    position: relative;
-}
-
-/* NAV */
-
-nav {
-    height: 75px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border);
-}
-
-.logo {
-    font-size: 21px;
-    font-weight: 900;
-    letter-spacing: 3px;
-}
-
-.logo span {
-    color: var(--green);
-}
-
-nav a {
-    color: var(--muted);
-    text-decoration: none;
-    margin-left: 25px;
-    font-size: 14px;
-    transition: .2s;
-}
-
-nav a:hover {
-    color: var(--green);
-}
-
-/* HERO */
-
-.hero {
-    text-align: center;
-    padding: 100px 0 80px;
-}
-
-.badge {
-    display: inline-block;
-    padding: 8px 14px;
-    border-radius: 50px;
-    border: 1px solid rgba(0,255,156,.35);
-    background: rgba(0,255,156,.05);
-    color: var(--green);
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.hero h1 {
-    font-size: clamp(45px, 8vw, 82px);
-    line-height: .95;
-    letter-spacing: -5px;
-    margin: 25px 0;
-}
-
-.hero h1 span {
-    color: var(--green);
-}
-
-.hero p {
-    max-width: 650px;
-    margin: auto;
-    color: var(--muted);
-    line-height: 1.7;
-    font-size: 17px;
-}
-
-/* SECTIONS */
-
-.section {
-    padding: 30px 0 80px;
-}
-
-.section-title {
-    margin-bottom: 25px;
-}
-
-.small-title {
-    color: var(--green);
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 7px;
-}
-
-.section-title h2 {
-    font-size: 32px;
-}
-
-/* AI GRID */
-
-.ai-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 17px;
-}
-
-.card {
-    background: linear-gradient(
-        145deg,
-        rgba(255,255,255,.035),
-        rgba(255,255,255,.01)
-    );
-
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 25px;
-
-    transition:
-        transform .2s,
-        border-color .2s,
-        background .2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    border-color: #34434c;
-    background: var(--card-hover);
-}
-
-.icon {
-    width: 55px;
-    height: 55px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 15px;
-    background: #0d1317;
-    border: 1px solid #263138;
-
-    font-size: 23px;
-    font-weight: 900;
-}
-
-.card h3 {
-    font-size: 23px;
-    margin-top: 18px;
-    margin-bottom: 8px;
-}
-
-.card p {
-    color: var(--muted);
-    line-height: 1.6;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-/* BUTTONS */
-
-.buttons {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 12px 16px;
-
-    border-radius: 11px;
-    border: 1px solid #29343b;
-
-    color: white;
-    text-decoration: none;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    background: #0d1215;
-
-    transition: .2s;
-}
-
-.btn:hover {
-    border-color: var(--green);
-    color: var(--green);
-}
-
-.btn-main {
-    background: var(--green);
-    border-color: var(--green);
-    color: #00140c;
-}
-
-.btn-main:hover {
-    background: #6affc5;
-    color: #00140c;
-}
-
-/* TOOLS */
-
-.tools {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 17px;
-}
-
-.tool-icon {
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--green);
-}
-
-/* INFO */
-
-.info {
-    margin-top: 20px;
-    padding: 15px 17px;
-
-    border: 1px solid var(--border);
-    border-radius: 13px;
-
-    color: #71808a;
-    font-size: 12px;
-    line-height: 1.6;
-}
-
-/* FOOTER */
-
-footer {
-    border-top: 1px solid var(--border);
-    padding: 30px 0 45px;
-    color: #5e6a72;
-    font-size: 12px;
-}
-
-/* MOBILE */
-
-@media (max-width: 700px) {
-
-    nav a {
-        display: none;
-    }
-
-    .hero {
-        padding: 70px 0 60px;
-    }
-
-    .hero h1 {
-        font-size: 48px;
-        letter-spacing: -3px;
-    }
-
-    .ai-grid,
-    .tools {
-        grid-template-columns: 1fr;
-    }
-
-    .section {
-        padding-bottom: 55px;
-    }
-}
+*{box-sizing:border-box}body{margin:0;background:#07080b;color:#fff;font-family:Arial,Helvetica,sans-serif}
+header{position:sticky;top:0;z-index:10;background:rgba(7,8,11,.88);backdrop-filter:blur(16px);border-bottom:1px solid #1b1d24;padding:18px 5%}
+nav{display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:1400px;margin:auto}
+.logo{font-size:24px;font-weight:900;letter-spacing:-1px}.logo span{color:#7c5cff}
+.badge{font-size:12px;color:#aaa;border:1px solid #292c35;border-radius:999px;padding:8px 12px}
+.hero{max-width:1400px;margin:auto;padding:55px 5% 25px}
+h1{font-size:clamp(38px,7vw,82px);line-height:.95;margin:0 0 18px;letter-spacing:-4px}
+h1 span{color:#7c5cff}.hero p{color:#999;font-size:17px;max-width:650px;line-height:1.6}
+.filters{max-width:1400px;margin:10px auto 25px;padding:0 5%;display:flex;gap:9px;flex-wrap:wrap}
+button{font:inherit;color:#ddd;background:#101218;border:1px solid #252833;padding:10px 15px;border-radius:12px;cursor:pointer}
+button.active,button:hover{background:#7c5cff;color:#fff;border-color:#7c5cff}
+.grid{max-width:1400px;margin:auto;padding:0 5% 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{position:relative;height:340px;border-radius:20px;overflow:hidden;background:#111;cursor:pointer;border:1px solid #20232c}
+.card img{width:100%;height:100%;object-fit:cover;display:block;transition:.45s}
+.card:hover img{transform:scale(1.06)}
+.info{position:absolute;left:0;right:0;bottom:0;padding:22px;background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.info b{font-size:18px}.info small{display:block;color:#bbb;margin-top:6px}
+.modal{display:none;position:fixed;inset:0;z-index:99;background:rgba(0,0,0,.92);padding:25px;align-items:center;justify-content:center}
+.modal.show{display:flex}.modal img{max-width:96vw;max-height:88vh;object-fit:contain;border-radius:12px}
+.close{position:fixed;right:22px;top:18px;font-size:30px;background:#17191f;border:0;width:48px;height:48px;border-radius:50%}
+.note{text-align:center;color:#777;font-size:12px;padding:0 20px 30px}
+@media(max-width:600px){.hero{padding-top:35px}h1{letter-spacing:-2px}.card{height:270px}.badge{display:none}}
 </style>
 </head>
-
 <body>
-
-<div class="container">
-
-<!-- NAVIGATION -->
-
-<nav>
-
-    <div class="logo">
-        GOOL<span>TOOL</span>
-    </div>
-
-    <div>
-        <a href="#ai">AI</a>
-        <a href="#tools">Инструменты</a>
-    </div>
-
-</nav>
-
-
-<!-- HERO -->
-
-<header class="hero">
-
-    <div class="badge">
-        AI HUB • 2026
-    </div>
-
-    <h1>
-        Всё нужное<br>
-        <span>AI</span> в одном месте.
-    </h1>
-
-    <p>
-        Быстрый доступ к популярным нейросетям,
-        приложениям и полезным инструментам.
-        Без API-ключей и лишнего мусора.
-    </p>
-
-</header>
-
-
-<!-- AI -->
-
-<section class="section" id="ai">
-
-    <div class="section-title">
-
-        <div class="small-title">
-            01 / Artificial Intelligence
-        </div>
-
-        <h2>
-            AI приложения
-        </h2>
-
-    </div>
-
-
-    <div class="ai-grid">
-
-
-        <!-- CLAUDE -->
-
-        <article class="card">
-
-            <div class="icon">
-                C
-            </div>
-
-            <h3>
-                Claude AI
-            </h3>
-
-            <p>
-                Мощный AI-помощник от Anthropic
-                для общения, анализа и работы с текстом.
-            </p>
-
-            <div class="buttons">
-
-                <a
-                    class="btn btn-main"
-                    href="https://claude.com/download"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Скачать
-                </a>
-
-                <a
-                    class="btn"
-                    href="https://claude.com/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Открыть
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- KIMI -->
-
-        <article class="card">
-
-            <div class="icon">
-                K
-            </div>
-
-            <h3>
-                Kimi AI
-            </h3>
-
-            <p>
-                AI-помощник Kimi с веб-версией
-                и приложениями для устройств.
-            </p>
-
-            <div class="buttons">
-
-                <a
-                    class="btn btn-main"
-                    href="https://www.kimi.com/en/products/download"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Скачать
-                </a>
-
-                <a
-                    class="btn"
-                    href="https://www.kimi.com/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Открыть
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- DEEPSEEK -->
-
-        <article class="card">
-
-            <div class="icon">
-                D
-            </div>
-
-            <h3>
-                DeepSeek
-            </h3>
-
-            <p>
-                AI-сервис DeepSeek для общения,
-                поиска информации и работы с задачами.
-            </p>
-
-            <div class="buttons">
-
-                <a
-                    class="btn btn-main"
-                    href="https://download.deepseek.com/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Скачать
-                </a>
-
-                <a
-                    class="btn"
-                    href="https://www.deepseek.com/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Открыть
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- CHATGPT -->
-
-        <article class="card">
-
-            <div class="icon">
-                AI
-            </div>
-
-            <h3>
-                ChatGPT
-            </h3>
-
-            <p>
-                Официальное приложение ChatGPT
-                и доступ к сервису OpenAI.
-            </p>
-
-            <div class="buttons">
-
-                <a
-                    class="btn btn-main"
-                    href="https://chatgpt.com/download/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Скачать
-                </a>
-
-                <a
-                    class="btn"
-                    href="https://chatgpt.com/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Открыть
-                </a>
-
-            </div>
-
-        </article>
-
-
-    </div>
-
+<header><nav><div class="logo">Gool<span>Wall</span></div><div class="badge">4K / 8K • WALLPAPERS</div></nav></header>
+
+<section class="hero">
+<h1>Обои, которые<br><span>хочется поставить.</span></h1>
+<p>Подборка красивых обоев для телефона, ПК и мониторов. Открывай картинку на весь экран — ничего скачивать для просмотра не нужно.</p>
 </section>
 
-
-<!-- TOOLS -->
-
-<section class="section" id="tools">
-
-    <div class="section-title">
-
-        <div class="small-title">
-            02 / Utilities
-        </div>
-
-        <h2>
-            Полезные инструменты
-        </h2>
-
-    </div>
-
-
-    <div class="tools">
-
-
-        <!-- TIKTOK -->
-
-        <article class="card">
-
-            <div class="tool-icon">
-                ↓
-            </div>
-
-            <h3>
-                TikTok Downloader
-            </h3>
-
-            <p>
-                Открыть внешний сервис для обработки
-                ссылки на TikTok.
-            </p>
-
-            <div class="buttons">
-
-                <a
-                    class="btn btn-main"
-                    href="https://snaptik.app/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Скачать видео
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- MP3 MP4 -->
-
-        <article class="card">
-
-            <div class="tool-icon">
-                MP4
-            </div>
-
-            <h3>
-                MP3 → MP4
-            </h3>
-
-            <p>
-                Онлайн-конвертация MP3 в MP4
-                через внешний сервис.
-            </p>
-
-            <div class="buttons">
-
-                <a
-                    class="btn btn-main"
-                    href="https://cloudconvert.com/mp3-to-mp4"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Конвертировать
-                </a>
-
-            </div>
-
-        </article>
-
-
-    </div>
-
-
-    <div class="info">
-
-        GoolTool не хранит APK и не выдаёт себя
-        за разработчика сторонних приложений.
-        Кнопки загрузки ведут на соответствующие
-        официальные страницы.
-
-    </div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-    GOOLTOOL © 2026 · AI HUB
-
-</footer>
-
-
+<div class="filters">
+<button class="active" data-cat="all">Все</button>
+<button data-cat="nature">Природа</button>
+<button data-cat="space">Космос</button>
+<button data-cat="city">Города</button>
+<button data-cat="dark">Dark</button>
 </div>
 
+<main class="grid" id="grid"></main>
+<div class="note">Изображения загружаются с внешнего фотохостинга. Реальное разрешение зависит от исходника.</div>
+
+<div class="modal" id="modal"><button class="close" id="close">×</button><img id="big" alt=""></div>
+
+<script>
+const wallpapers=[
+["nature","Горные вершины","https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=7680&q=95"],
+["nature","Туманное озеро","https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=7680&q=95"],
+["nature","Дикая природа","https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=7680&q=95"],
+["nature","Лес в горах","https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=7680&q=95"],
+["space","Космос","https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=7680&q=95"],
+["space","Звёздное небо","https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=7680&q=95"],
+["city","Ночной город","https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=7680&q=95"],
+["city","Неон","https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=7680&q=95"],
+["dark","Dark Mountain","https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=7680&q=95"],
+["dark","Черный океан","https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=7680&q=95"],
+["city","Архитектура","https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=7680&q=95"],
+["nature","Закат","https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=7680&q=95"]
+];
+
+const grid=document.getElementById("grid");
+function render(cat="all"){
+ grid.innerHTML="";
+ wallpapers.filter(x=>cat==="all"||x[0]===cat).forEach(x=>{
+   const card=document.createElement("article");
+   card.className="card";
+   card.innerHTML=`<img loading="lazy" src="${x[2]}" alt="${x[1]}"><div class="info"><b>${x[1]}</b><small>${x[0].toUpperCase()} • 4K / 8K</small></div>`;
+   card.onclick=()=>{document.getElementById("big").src=x[2];document.getElementById("modal").classList.add("show")};
+   grid.appendChild(card);
+ });
+}
+document.querySelectorAll(".filters button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll(".filters button").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active"); render(b.dataset.cat);
+});
+document.getElementById("close").onclick=()=>document.getElementById("modal").classList.remove("show");
+document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")e.currentTarget.classList.remove("show")};
+render();
+</script>
 </body>
-              </html>
+</html>
